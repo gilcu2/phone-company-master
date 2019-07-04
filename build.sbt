@@ -21,15 +21,15 @@ libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-sql" % sparkV % "provided",
   "org.apache.spark" %% "spark-mllib" % sparkV % "runtime",
 
-  "com.typesafe" % "config" % "1.3.2",
+  "com.typesafe" % "config" % "1.3.4",
 
-  "com.typesafe.scala-logging" %% "scala-logging" % "3.9.0",
+  "com.typesafe.scala-logging" %% "scala-logging" % "3.9.2",
   "ch.qos.logback" % "logback-classic" % "1.2.3",
 
-  "org.rogach" %% "scallop" % "3.1.2",
-  "com.github.nscala-time" %% "nscala-time" % "2.20.0",
+  "org.rogach" %% "scallop" % "3.3.1",
+  "com.github.nscala-time" %% "nscala-time" % "2.22.0",
 
-  "org.scalatest" %% "scalatest" % "3.0.5" % "test",
+  "org.scalatest" %% "scalatest" % "3.0.8" % "test"
 
 )
 
