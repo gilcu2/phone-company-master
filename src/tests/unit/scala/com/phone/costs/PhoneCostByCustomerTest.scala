@@ -2,7 +2,7 @@ package com.phone.costs
 
 import org.scalatest.{FlatSpec, Matchers}
 
-class PhoneCostTest extends FlatSpec with Matchers {
+class PhoneCostByCustomerTest extends FlatSpec with Matchers {
 
   behavior of "PhoneCost"
 
