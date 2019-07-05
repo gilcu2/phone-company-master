@@ -10,3 +10,14 @@ For a customer the cost of a call up to and including 3 minutes in duration is c
 
 Write a program that when run will parse the `calls.log` file and print out the total cost of calls for the day for each customer. You can use any libraries you wish to.
 
+## Tests
+
+* sbt test
+* sbt acceptance:test
+
+## Run
+
+1. Install spark and add bin directory to PATH
+1. sbt assembly
+1. cd scripts
+1. ./run.sh -l

@@ -13,7 +13,7 @@ class PhoneCostByCustomerTest extends FlatSpec with Matchers {
     )
 
     durationsAndExpectedCosts.foreach { case (duration, expectedCost) => {
-      PhoneCost.computeCost(duration) shouldBe expectedCost
+      PhoneCost.computeCostByCall(duration) shouldBe expectedCost
     }
     }
   }

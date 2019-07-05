@@ -10,7 +10,7 @@ object PhoneCost {
   private val costMoreThan3Minutes = 3
   private val secondsOf3Minutes = 180
 
-  def compute(logs: Dataset[PhoneLog])(implicit spark: SparkSession): Dataset[CostByCustomer] = {
+  def computeTotalCosts(logs: Dataset[PhoneLog])(implicit spark: SparkSession): Dataset[CostByCustomer] = {
 
     val costByNumber = computeCostByNumber(logs)
 
@@ -23,7 +23,7 @@ object PhoneCost {
     import spark.implicits._
 
     costByNumber
-      .map(costByNumber => CostAndMaximum(costByNumber.customerId, costByNumber.cost, 0L))
+      .map(costByNumber => CostAndMaximum(costByNumber.customerId, costByNumber.cost, costByNumber.cost))
       .groupByKey(_.customerId)
       .reduceGroups(reduce _)
       .map { case (customerId, costAndMaximum) =>
@@ -38,14 +38,14 @@ object PhoneCost {
     import spark.implicits._
 
     logs
-      .map(log => CostByNumber(log.customerId, log.calledNumber, computeCost(log.duration)))
+      .map(log => CostByNumber(log.customerId, log.calledNumber, computeCostByCall(log.duration)))
       .groupBy("customerId", "number")
       .agg(sum("cost"))
       .select($"customerId", $"number", $"sum(cost)".alias("cost"))
       .as[CostByNumber]
   }
 
-  def computeCost(duration: Int): Int = if (duration <= secondsOf3Minutes)
+  def computeCostByCall(duration: Int): Int = if (duration <= secondsOf3Minutes)
     duration * costLessThan3Minutes
   else
     secondsOf3Minutes * costLessThan3Minutes + (duration - secondsOf3Minutes) * costMoreThan3Minutes
